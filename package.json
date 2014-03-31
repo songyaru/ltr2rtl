@@ -1,24 +1,24 @@
 {
-  "author": {
-    "name": "songyaru",
-    "email": "songyaru9@gmail.com",
-    "url": ""
-  },
-  "name": "ltr2rtl",
-  "description": "Right to Left Language Automatic Transfer",
-  "keywords": [
-    "css",
-    "ltr",
-    "rtl",
-    "dir"
-  ],
-  "main": "rtl.js",
-  "bin": {
-    "rtl": "rtl.js",
-    "ltr": "ltr.js"
-  },
-  "version": "0.1.14",
-  "engines": {
-    "node": ">= 0.8.0"
-  }
+    "author": {
+        "name": "songyaru",
+        "email": "songyaru9@gmail.com",
+        "url": ""
+    },
+    "name": "ltr2rtl",
+    "description": "Right to Left Language Automatic Transfer",
+    "keywords": [
+        "css",
+        "ltr",
+        "rtl",
+        "convert",
+        "dir"
+    ],
+    "main": "tasks/convert.js",
+    "bin": {
+        "rtl": "bin/rtl.js"
+    },
+    "version": "0.1.15",
+    "engines": {
+        "node": ">= 0.8.0"
+    }
 }

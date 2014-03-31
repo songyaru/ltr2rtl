@@ -1,0 +1,21 @@
+.a-left {
+    float: right;
+    margin-right: 10px;
+    padding: 10px 40px 30px 20px;
+    text-align: left;
+    right: 10px;
+}
+
+.b-left {
+    border-left: 10px
+}
+
+ .b-right{border-right:10px}
+
+.a-right {
+    float: left;
+    margin-left: 10px;
+    padding: 10px 20px 30px 40px;
+    text-align: right;
+    right: 100px;
+}
