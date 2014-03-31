@@ -4,7 +4,7 @@
         "email": "songyaru9@gmail.com",
         "url": ""
     },
-    "name": "ltr2rtl",
+    "name": "rtl",
     "description": "Right to Left Language Automatic Transfer",
     "keywords": [
         "css",
@@ -17,7 +17,7 @@
     "bin": {
         "rtl": "bin/rtl.js"
     },
-    "version": "0.1.15",
+    "version": "0.1.2",
     "engines": {
         "node": ">= 0.8.0"
     }
