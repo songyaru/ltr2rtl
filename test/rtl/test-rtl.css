@@ -7,9 +7,24 @@
 }
 
 .b-left {
-    border-left: 10px
+    border-left: 10px;
 }
 
+.br1 {
+    border-radius: 10px;
+}
+
+.br2 {
+    border-radius: 20px 80px;
+}
+
+.br3 {
+    border-radius: 20px 80px 20px 50px;
+}
+
+.br4 {
+    border-radius: 20px 80px 40px 50px;
+}
 
 
 .a-right {
@@ -19,3 +34,4 @@
     text-align: right;
     right: 100px;
 }
+

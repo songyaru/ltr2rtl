@@ -7,9 +7,24 @@
 }
 
 .b-left {
-    border-right: 10px
+    border-right: 10px;
 }
 
+.br1 {
+    border-radius: 10px;
+}
+
+.br2 {
+    border-radius: 80px 20px;
+}
+
+.br3 {
+    border-radius: 80px 20px 50px;
+}
+
+.br4 {
+    border-radius: 80px 20px 50px 40px;
+}
 
 /*rtl
 .a-right {
@@ -19,4 +34,5 @@
     text-align: right;
     right: 100px;
 }
+
 rtl*/

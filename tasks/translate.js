@@ -1,7 +1,7 @@
 var fs = require("fs");
 
 var shorthandRegex = function (repeats, hasSuffix) {
-    var pattern = '(padding|margin|border\\-width|border\\-color|border\\-style|border\\-radius)\\s*:\\s*';
+    var pattern = '(padding|margin|border\\-width|border\\-color|border\\-style)\\s*:\\s*';
     for (var i = 0; i < repeats; i++) {
         pattern += '([\\-\\d\\w\\.%#\\(\\),\\s]+)' + (i < repeats - 1 ? ' ' : '');
     }
@@ -15,23 +15,49 @@ var getOppositeDir = function (dir) {
 };
 
 //todo 优化replace正则
-var replaceMBPLR = /(padding|margin|border)(-)(left|right)/g;
+var replaceMBPLR = /(padding|margin|border|border-top|border-bottom)(-)(left|right)/g;
 var replaceFTLR = /(float|text-align)\s*(:)\s*(left|right)/g;
 var positionLR = /(\s+|{)(left|right)\s*(:)\s*/g;
+
+var borderRadiusLR = /(border-radius)\s*(:)\s*((?:[\d\w\.]+\s*){1,4})/g;
+var convertBorderRadius = function (property, symbol, value) {
+    var arr = value.split(/\s+/);
+    var len = arr.length;
+    var valStr = "";
+    switch (len) {
+        case 1:
+            valStr = value;
+            break;
+        case 2:
+            valStr = arr[1] + " " + arr[0];
+            break;
+        case 3:
+            valStr = arr[1] + " " + arr[0] + " " + arr[1] + " " + arr[2];
+            break;
+        case 4:
+            valStr = arr[1] + " " + arr[0] + " " + arr[3] + " " + arr[2];
+            break;
+    }
+    return property + symbol + " " + valStr;
+};
+
 var replaceLR = new RegExp([
     replaceMBPLR.source,
     replaceFTLR.source,
     positionLR.source,
+    borderRadiusLR.source,
     shorthandRegex(4, false).source
 ].join('|'), 'g');
+
+
 var translate = function (source) {
     return source
-//        .replace(p, function (match, property, top, right, bottom, left) { //左右互换
-//          return property + ':' + top + ' ' + left + ' ' + bottom + ' ' + right;
-//        })
         .replace(replaceLR, function () {
             var args = arguments;
-            for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 4; i++) {
+                if (i == 3) {
+                    return convertBorderRadius(args[i * 3 + 1], args[i * 3 + 2], args[i * 3 + 3]);
+                }
                 if (args[i * 3 + 3]) {
                     if (args[i * 3 + 3] == ":") {//positionLR
                         // left:xx ==> right:xx
@@ -47,15 +73,6 @@ var translate = function (source) {
             // top right bottom left ==> top left bottom right
             return args[i * 3 + 1] + ': ' + args[i * 3 + 2] + ' ' + args[i * 3 + 5] + ' ' + args[i * 3 + 4] + ' ' + args[i * 3 + 3];
         });
-    /*        .replace(replaceMBPLR, function (match, property, value) {
-     return property + "-" + (value == "left" ? "right" : "left");
-     })
-     .replace(replaceFTLR, function (match, property, value) {
-     return property + ":" + (value == "left" ? "right" : "left");
-     })
-     .replace(positionLR, function (match, prefix, value) {
-     return prefix + (value == "left" ? "right" : "left") + ":";
-     });*/
 };
 
 
