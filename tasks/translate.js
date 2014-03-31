@@ -55,10 +55,10 @@ var translate = function (source) {
         .replace(replaceLR, function () {
             var args = arguments;
             for (var i = 0; i < 4; i++) {
-                if (i == 3) {
-                    return convertBorderRadius(args[i * 3 + 1], args[i * 3 + 2], args[i * 3 + 3]);
-                }
                 if (args[i * 3 + 3]) {
+                    if (i == 3) {
+                        return convertBorderRadius(args[i * 3 + 1], args[i * 3 + 2], args[i * 3 + 3]);
+                    }
                     if (args[i * 3 + 3] == ":") {//positionLR
                         // left:xx ==> right:xx
                         return args[i * 3 + 1] + getOppositeDir(args[i * 3 + 2]) + ": ";
