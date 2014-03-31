@@ -5,19 +5,12 @@ var convert = function (opts) {
     var mkDir = require("./mkdir.js");
 
 
-    var fromDir = opts.ltr ? /\/rtl\// : /\/ltr\//; //转换命令，搜寻ltr或rtl下的css文件
+    var fromDir = new RegExp(path.sep + (opts.ltr ? "rtl" : "ltr") + path.sep,i); //转换命令，搜寻ltr或rtl下的css文件
     var toDir = opts.ltr ? "/ltr/" : "/rtl/";//转换后的生成路劲
 
-    var jsonConfig = {
-        src: "./",
-        dest: "./"
-    };
+    var destDir = path.normalize("./");
+    var src = "./";
 
-
-    var destDir = path.normalize(jsonConfig.dest);
-
-    mkDir(destDir);
-    var src = jsonConfig.src;
     var srcArray = [];
     var read = function (p) {
         var filePath = path.normalize(p);
@@ -40,14 +33,7 @@ var convert = function (opts) {
 
     };
 
-    if (typeof src == "string") {
-        src = [src];
-    }
-    for (var i = 0, len = src.length; i < len; i++) {
-        var f = src[i];
-        read(f);
-    }
-
+    read(src);
     for (var i = 0, len = srcArray.length; i < len; i++) {
         if (i == 0) {
             console.log("\n===========================This file(s) generated !===========================\n");
