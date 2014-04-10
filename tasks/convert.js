@@ -26,7 +26,7 @@ var convert = function (opts) {
                 read(filePath + "/" + files[i]);
             }
         } else if (extName == ".css") {
-            if (fromDir.test(filePath)) {
+            if (fromDir.test("\\" + path.sep + filePath)) {//fix bug lrt/rtl 上一级目录下运行不生效
                 srcArray.push(filePath);
             }
         }
@@ -43,15 +43,26 @@ var convert = function (opts) {
         var destFile = file.replace(fromDir, toDir);
         var destDirPath = destDir + "/" + path.dirname(destFile).replace(/^(\w\:)*/, "") + "/";
         mkDir(destDirPath);
-        if (opts.ltr && opts.fix) {
-            destFile = destDirPath + path.basename(destFile, path.extname(destFile)).replace(/(.+)(?:-rtl)$/, "$1") + ".css";
-        } else {
-            destFile = destDirPath + path.basename(destFile, path.extname(destFile)) + opts.fix + ".css";
+//        if (opts.ltr && opts.fix) {
+//            destFile = destDirPath + path.basename(destFile, path.extname(destFile)).replace(/(.+)(?:-rtl)$/, "$1") + ".css";
+//        } else {
+//            destFile = destDirPath + path.basename(destFile, path.extname(destFile)) + opts.fix + ".css";
+//        }
+
+        if (opts.fix) {//二级页命名规则 ***/ltr/xx.css ***/rtl/xx-rtl.css
+            if (opts.ltr) {
+                destFile = destDirPath + path.basename(destFile, path.extname(destFile)).replace(/(.+)(?:-rtl)$/, "$1") + ".css";
+            } else {
+                destFile = destDirPath + path.basename(destFile, path.extname(destFile)) + opts.fix + ".css";
+            }
+        } else {//主站命名规则 ***/ltr/ltr**.css ***/rtl/rtl**.css
+            destFile = destDirPath + path.basename(destFile, path.extname(destFile)).replace(/(ltr|rtl)/i, function ($1) {
+                return $1 == "ltr" ? "rtl" : "ltr";
+            }) + ".css";
         }
 
         var rtlString = trans(file);
         fs.writeFileSync(destFile, rtlString);
-        console.log(path.normalize(destFile));
         if (i == len - 1) {
             console.log("\n===========================", len, "file(s) done !===========================\n");
         }
