@@ -63,6 +63,7 @@ var convert = function (opts) {
 
         var rtlString = trans(file);
         fs.writeFileSync(destFile, rtlString);
+        console.log(path.normalize(destFile));
         if (i == len - 1) {
             console.log("\n===========================", len, "file(s) done !===========================\n");
         }
