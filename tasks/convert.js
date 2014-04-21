@@ -4,8 +4,8 @@ var convert = function (opts) {
     var path = require("path");
     var mkDir = require("./mkdir.js");
 
-
-    var fromDir = new RegExp("(?:\\" + path.sep+")?" + (opts.ltr ? "rtl" : "ltr") + "\\" + path.sep, "i"); //转换命令，搜寻ltr或rtl下的css文件
+    var dir = opts.ltr ? "(rtl)" : "(ltr)";
+    var fromDir = new RegExp("(?:\\" + path.sep + dir + "|^" + dir + ")\\" + path.sep, "i"); //转换命令，搜寻ltr或rtl下的css文件
     var toDir = opts.ltr ? "/ltr/" : "/rtl/";//转换后的生成路劲
 
     var destDir = path.normalize("./");
