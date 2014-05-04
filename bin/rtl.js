@@ -1,23 +1,23 @@
 #! /usr/bin/env node
 
 var convert = require('../tasks/convert');
+var program = require('commander');
 
 var argOpts = {'ltr': false, 'fix': ""};
 
-function main() {
-    process.argv.forEach(function (val, index, array) {
-        if (index > 1) {
-            var args = val.split("");
-            args.forEach(function (v, i) {
-                if (v == "r") {
-                    argOpts.ltr = true;
-                } else if (v == "f") {
-                    argOpts.fix = "-rtl";
 
-                }
-            });
-        }
-    });
+
+function main() {
+    program
+      .version(require('../package.json').version)
+      .usage('[options]')
+      .option('-r, --reverse', '从rtl转为ltr.')
+      .option('-f, --suffix', '添加后缀:转为xxx-rtl.css')
+      .parse(process.argv);
+
+    if(program.reverse) argOpts.ltr = true;
+    if(program.suffix) argOpts.fix = "-rtl";
+    
     convert(argOpts);
 }
 main();
