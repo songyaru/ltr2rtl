@@ -17,6 +17,9 @@
     "bin": {
         "rtl": "bin/rtl.js"
     },
+    "dependencies":{
+    	"commander":"latest"
+    }, 
     "version": "0.1.9",
     "engines": {
         "node": ">= 0.8.0"
