@@ -36,7 +36,7 @@ rtl -r
 ```shell
 rtl -f
 ```
--r(suffix) 搜寻或生成 rtl 语言类型的 css 文件都会自动加上 -rtl 的后缀
+-f(suffix) 搜寻或生成 rtl 语言类型的 css 文件都会自动加上 -rtl 的后缀
 如:```./*/ltr/*/*-rtl.css```
 
 ## 其他说明
