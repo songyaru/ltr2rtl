@@ -2,7 +2,7 @@
     "author": {
         "name": "songyaru",
         "email": "songyaru9@gmail.com",
-        "url": ""
+        "url": "https://github.com/songyaru"
     },
     "name": "rtl",
     "description": "Right to Left Language Automatic Transfer",
@@ -19,8 +19,10 @@
     },
     "dependencies":{
     	"commander":"~2.2.0"
-    }, 
-    "version": "0.1.9",
+    },
+    "version": "0.1.18",
+    "readme": "# rtl\r\n\r\n自动转换 css 文件以适应从右到左的语言布局\r\n\r\n## 通过npm安装:\r\n\r\n```shell\r\nnpm install rtl -g\r\n```\r\n\r\n## git仓库地址:\r\n\r\n[https://github.com/songyaru/ltr2rtl](https://github.com/songyaru/ltr2rtl)\r\n\r\n## 使用方法\r\n\r\n### 在命令行中输入\r\n\r\n```shell\r\nrtl\r\n```\r\n\r\n在命令行当前目录及其子目录下搜寻包含 ltr 或者 rtl 目录的 css 文件\r\n\r\n如:将 ltr 语言类型的 css 文件转换成 rtl 文件,搜寻```./somedir/ltr/otherdir/``` 这一类目录下的所有 css 文件，转换后生成到```./somedir/rtl/otherdir/```目录下\r\n\r\n### 命令参数\r\n\r\n```shell\r\nrtl -r\r\n```\r\n-r(reverse) 搜索```./somedir/rtl/otherdir/``` 这一类目录下的所有css文件，转换后生成到```./somedir/ltr/otherdir/```目录下\r\n\r\n将 rtl 语言类型的 css 文件转换成 ltr。方便调试修改后写回到 ltr 文件\r\n\r\n```shell\r\nrtl -f\r\n```\r\n-f(suffix) 搜寻或生成 rtl 语言类型的 css 文件都会自动加上 -rtl 的后缀\r\n如:```./*/ltr/*/*-rtl.css```\r\n\r\n## 其他说明\r\n\r\n待转换的 css 中,如果有 rtl 特有的样式，可以写在以``` /*rtl rtl*/ ``` 包裹的注释里面，生成 rtl 的时候会自动把这部分注释打开。以达到只维护一份 css 文件的目的。\r\n\r\n",
+    "readmeFilename": "README.md",
     "engines": {
         "node": ">= 0.8.0"
     }
